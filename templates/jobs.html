@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Browse Jobs - JobPortal{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Job Listings</h1>
+
+    <!-- Filter Section -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <form method="get" action="/jobs" class="row g-3">
+                <div class="col-md-4">
+                    <label for="search" class="form-label">Search Job</label>
+                    <input type="text" class="form-control" id="search" name="search" placeholder="Job title, company..." value="{{ request.args.get('search', '') }}">
+                </div>
+                <div class="col-md-4">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="City or location" value="{{ request.args.get('location', '') }}">
+                </div>
+                <div class="col-md-4">
+                    <label for="job_type" class="form-label">Job Type</label>
+                    <select class="form-control" id="job_type" name="job_type">
+                        <option value="">All Types</option>
+                        <option value="Full-time" {% if request.args.get('job_type') == 'Full-time' %}selected{% endif %}>Full-time</option>
+                        <option value="Part-time" {% if request.args.get('job_type') == 'Part-time' %}selected{% endif %}>Part-time</option>
+                        <option value="Contract" {% if request.args.get('job_type') == 'Contract' %}selected{% endif %}>Contract</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                    <a href="/jobs" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> Reset
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Jobs List -->
+    <div class="row">
+        {% for job in jobs %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card job-card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ job.title }}</h5>
+                    <p class="card-text text-muted">
+                        <i class="fas fa-building"></i> {{ job.company }}
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <i class="fas fa-map-marker-alt"></i> {{ job.location }}<br>
+                            <i class="fas fa-briefcase"></i> {{ job.job_type }}<br>
+                            <i class="fas fa-star"></i> {{ job.experience_level }}
+                        </small>
+                    </p>
+                    {% if job.salary_min and job.salary_max %}
+                    <p class="card-text">
+                        <strong class="text-success">${{ "{:,}".format(job.salary_min) }} - ${{ "{:,}".format(job.salary_max) }}</strong>
+                    </p>
+                    {% endif %}
+                    <a href="/job/{{ job.id }}" class="btn btn-primary btn-sm w-100">
+                        <i class="fas fa-eye"></i> View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">
+                <i class="fas fa-search"></i> No jobs found matching your criteria.
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    {% if pagination %}
+    <nav aria-label="Page navigation" class="mt-5">
+        <ul class="pagination justify-content-center">
+            {% if pagination.has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('jobs', page=pagination.prev_num, search=request.args.get('search', ''), location=request.args.get('location', ''), job_type=request.args.get('job_type', '')) }}">Previous</a>
+            </li>
+            {% endif %}
+
+            {% for page_num in pagination.iter_pages() %}
+                {% if page_num %}
+                    {% if page_num == pagination.page %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ page_num }}</span>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('jobs', page=page_num, search=request.args.get('search', ''), location=request.args.get('location', ''), job_type=request.args.get('job_type', '')) }}">{{ page_num }}</a>
+                    </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if pagination.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url_for('jobs', page=pagination.next_num, search=request.args.get('search', ''), location=request.args.get('location', ''), job_type=request.args.get('job_type', '')) }}">Next</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}
