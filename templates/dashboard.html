@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - JobPortal{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Welcome, {{ user.username }}!</h1>
+    
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Applications</h5>
+                    <h2>{{ applications|length }}</h2>
+                    <a href="/applications" class="btn btn-light btn-sm mt-2">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Saved Jobs</h5>
+                    <h2>{{ saved_jobs|length }}</h2>
+                    <a href="/saved-jobs" class="btn btn-light btn-sm mt-2">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Profile</h5>
+                    <h2>{{ user.first_name if user.first_name else '0' }}</h2>
+                    <a href="/profile" class="btn btn-light btn-sm mt-2">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Member Since</h5>
+                    <p>{{ user.created_at.strftime('%b %Y') }}</p>
+                    <a href="/jobs" class="btn btn-light btn-sm mt-2">Browse Jobs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Recent Applications</h5>
+                </div>
+                <div class="card-body">
+                    {% if applications %}
+                        <div class="list-group">
+                            {% for app in applications[:5] %}
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1">{{ app.job.title }}</h6>
+                                    <span class="badge bg-{{ 'success' if app.status == 'Applied' else 'warning' if app.status == 'Interview' else 'danger' }}">{{ app.status }}</span>
+                                </div>
+                                <p class="mb-1 text-muted"><i class="fas fa-building"></i> {{ app.job.company }}</p>
+                                <small class="text-muted">{{ app.applied_date.strftime('%b %d, %Y') }}</small>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <a href="/applications" class="btn btn-outline-primary btn-sm mt-3 w-100">View All Applications</a>
+                    {% else %}
+                        <p class="text-muted">No applications yet. <a href="/jobs">Start applying now!</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Saved Jobs</h5>
+                </div>
+                <div class="card-body">
+                    {% if saved_jobs %}
+                        <div class="list-group">
+                            {% for saved in saved_jobs[:5] %}
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1">{{ saved.job.title }}</h6>
+                                    <i class="fas fa-bookmark text-warning"></i>
+                                </div>
+                                <p class="mb-1 text-muted"><i class="fas fa-building"></i> {{ saved.job.company }}</p>
+                                <small class="text-muted"><i class="fas fa-map-marker-alt"></i> {{ saved.job.location }}</small>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <a href="/saved-jobs" class="btn btn-outline-primary btn-sm mt-3 w-100">View All Saved Jobs</a>
+                    {% else %}
+                        <p class="text-muted">No saved jobs yet. <a href="/jobs">Browse jobs and save your favorites!</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
