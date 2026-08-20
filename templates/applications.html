@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}My Applications - JobPortal{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">
+        <i class="fas fa-file-alt"></i> My Applications
+    </h1>
+
+    {% if applications %}
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Job Title</th>
+                    <th>Company</th>
+                    <th>Location</th>
+                    <th>Applied Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for app in applications %}
+                <tr>
+                    <td>
+                        <strong>{{ app.job.title }}</strong>
+                    </td>
+                    <td>{{ app.job.company }}</td>
+                    <td>{{ app.job.location }}</td>
+                    <td>{{ app.applied_date.strftime('%b %d, %Y') }}</td>
+                    <td>
+                        <span class="badge bg-{{ 'success' if app.status == 'Applied' else 'warning' if app.status == 'Interview' else 'danger' if app.status == 'Rejected' else 'info' }}">
+                            {{ app.status }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="/job/{{ app.job.id }}" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-eye"></i> View Job
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body text-center">
+                    <h5>Total Applications</h5>
+                    <h2>{{ applications|length }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body text-center">
+                    <h5>Interviews</h5>
+                    <h2>{{ applications|selectattr('status', 'equalto', 'Interview')|list|length }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body text-center">
+                    <h5>Applied</h5>
+                    <h2>{{ applications|selectattr('status', 'equalto', 'Applied')|list|length }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white">
+                <div class="card-body text-center">
+                    <h5>Rejected</h5>
+                    <h2>{{ applications|selectattr('status', 'equalto', 'Rejected')|list|length }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center">
+        <i class="fas fa-inbox"></i> You haven't applied to any jobs yet.
+        <a href="/jobs" class="alert-link">Browse and apply for jobs</a> now!
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
