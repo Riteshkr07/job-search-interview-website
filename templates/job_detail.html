@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}{{ job.title }} - JobPortal{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <h1 class="mb-2">{{ job.title }}</h1>
+                    <p class="lead text-muted mb-4">
+                        <i class="fas fa-building"></i> {{ job.company }}
+                    </p>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <p><strong><i class="fas fa-map-marker-alt"></i> Location:</strong> {{ job.location }}</p>
+                            <p><strong><i class="fas fa-briefcase"></i> Job Type:</strong> {{ job.job_type }}</p>
+                            <p><strong><i class="fas fa-star"></i> Experience Level:</strong> {{ job.experience_level }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            {% if job.salary_min and job.salary_max %}
+                            <p><strong><i class="fas fa-dollar-sign"></i> Salary:</strong> ${{ "{:,}".format(job.salary_min) }} - ${{ "{:,}".format(job.salary_max) }}</p>
+                            {% endif %}
+                            <p><strong><i class="fas fa-calendar"></i> Posted:</strong> {{ job.posted_date.strftime('%b %d, %Y') }}</p>
+                            {% if job.deadline %}
+                            <p><strong><i class="fas fa-clock"></i> Deadline:</strong> {{ job.deadline.strftime('%b %d, %Y') }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h3 class="mb-3">Job Description</h3>
+                    <p>{{ job.description }}</p>
+
+                    {% if job.requirements %}
+                    <h3 class="mb-3">Requirements</h3>
+                    <p>{{ job.requirements }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if current_user %}
+            <!-- Apply Form -->
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Apply for this Job</h5>
+                </div>
+                <div class="card-body">
+                    {% if applied %}
+                    <div class="alert alert-info">
+                        <i class="fas fa-check-circle"></i> You have already applied for this job.
+                    </div>
+                    {% else %}
+                    <form method="POST" action="/apply/{{ job.id }}">
+                        <div class="mb-3">
+                            <label for="cover_letter" class="form-label">Cover Letter (Optional)</label>
+                            <textarea class="form-control" id="cover_letter" name="cover_letter" rows="5" placeholder="Tell us why you're interested in this role..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <i class="fas fa-paper-plane"></i> Submit Application
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            {% else %}
+            <div class="alert alert-warning">
+                <i class="fas fa-sign-in-alt"></i> <a href="/login">Login</a> to apply for this job.
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="col-md-4">
+            <!-- Sidebar -->
+            <div class="card shadow mb-4">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    {% if current_user %}
+                        {% if saved %}
+                        <button class="btn btn-warning btn-block w-100 mb-2 save-job-btn" data-job-id="{{ job.id }}">
+                            <i class="fas fa-bookmark"></i> Unsave Job
+                        </button>
+                        {% else %}
+                        <button class="btn btn-outline-warning btn-block w-100 mb-2 save-job-btn" data-job-id="{{ job.id }}">
+                            <i class="fas fa-bookmark"></i> Save Job
+                        </button>
+                        {% endif %}
+                    {% else %}
+                        <a href="/login" class="btn btn-outline-warning w-100 mb-2">
+                            <i class="fas fa-bookmark"></i> Save Job
+                        </a>
+                    {% endif %}
+                    
+                    <a href="/jobs" class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-arrow-left"></i> Back to Jobs
+                    </a>
+                </div>
+            </div>
+
+            <!-- Company Info -->
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Company</h5>
+                </div>
+                <div class="card-body">
+                    <p class="h5">{{ job.company }}</p>
+                    {% if job.company_logo %}
+                    <img src="{{ job.company_logo }}" alt="{{ job.company }}" class="img-fluid mb-3">
+                    {% endif %}
+                    <p class="text-muted">Open positions at {{ job.company }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+document.querySelectorAll('.save-job-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const jobId = this.dataset.jobId;
+        fetch('/save-job/' + jobId, {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert('Error: ' + data.message);
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
+
+{% endblock %}
