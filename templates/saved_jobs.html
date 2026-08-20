@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Saved Jobs - JobPortal{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">
+        <i class="fas fa-bookmark"></i> Saved Jobs
+    </h1>
+
+    {% if saved_jobs %}
+    <div class="row">
+        {% for saved in saved_jobs %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card job-card h-100 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="card-title">{{ saved.job.title }}</h5>
+                        <form method="POST" action="/unsave-job/{{ saved.job.id }}" style="display:inline;">
+                            <button type="submit" class="btn btn-sm btn-link text-warning p-0">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <p class="card-text text-muted">
+                        <i class="fas fa-building"></i> {{ saved.job.company }}
+                    </p>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <i class="fas fa-map-marker-alt"></i> {{ saved.job.location }}<br>
+                            <i class="fas fa-briefcase"></i> {{ saved.job.job_type }}<br>
+                            <i class="fas fa-star"></i> {{ saved.job.experience_level }}
+                        </small>
+                    </p>
+                    {% if saved.job.salary_min and saved.job.salary_max %}
+                    <p class="card-text">
+                        <strong class="text-success">${{ "{:,}".format(saved.job.salary_min) }} - ${{ "{:,}".format(saved.job.salary_max) }}</strong>
+                    </p>
+                    {% endif %}
+                    <p class="text-muted small">Saved: {{ saved.saved_date.strftime('%b %d, %Y') }}</p>
+                    <a href="/job/{{ saved.job.id }}" class="btn btn-primary btn-sm w-100">
+                        <i class="fas fa-eye"></i> View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center">
+        <i class="fas fa-bookmark"></i> You haven't saved any jobs yet.
+        <a href="/jobs" class="alert-link">Browse jobs</a> and save your favorites!
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
