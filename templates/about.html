@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - JobPortal{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <!-- Header Section -->
+    <div class="row mb-5">
+        <div class="col-md-8 mx-auto text-center">
+            <h1 class="display-4 fw-bold mb-3">About JobPortal</h1>
+            <p class="lead text-muted">Connecting job seekers with their dream careers since 2024</p>
+        </div>
+    </div>
+
+    <!-- Mission Section -->
+    <div class="row mb-5">
+        <div class="col-md-6">
+            <h2 class="fw-bold mb-3">Our Mission</h2>
+            <p>At JobPortal, we believe that everyone deserves the opportunity to find meaningful work that aligns with their skills, values, and aspirations. Our mission is to make job searching easier, more transparent, and more personalized than ever before.</p>
+            <p>We're dedicated to bridging the gap between talented professionals and employers who are looking for their next team members.</p>
+        </div>
+        <div class="col-md-6">
+            <img src="https://via.placeholder.com/500x300?text=Our+Mission" alt="Our Mission" class="img-fluid rounded">
+        </div>
+    </div>
+
+    <!-- Values Section -->
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h2 class="fw-bold mb-4 text-center">Our Core Values</h2>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-handshake text-primary" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <h5 class="card-title">Integrity</h5>
+                    <p class="card-text">We maintain transparency and honesty in all our dealings with job seekers and employers.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-lightbulb text-success" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <h5 class="card-title">Innovation</h5>
+                    <p class="card-text">We continuously improve our platform to provide the best user experience possible.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-users text-info" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+                    <h5 class="card-title">Community</h5>
+                    <p class="card-text">We believe in building a supportive community for job seekers to share and learn.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mb-5">
+        <div class="col-md-12">
+            <h2 class="fw-bold mb-4">Why Choose JobPortal?</h2>
+        </div>
+        <div class="col-md-6">
+            <h5><i class="fas fa-check-circle text-success"></i> Comprehensive Job Search</h5>
+            <p>Access thousands of job listings from top companies across various industries.</p>
+            
+            <h5><i class="fas fa-check-circle text-success"></i> Advanced Filtering</h5>
+            <p>Find jobs that match your skills, experience, and preferences with our advanced search filters.</p>
+            
+            <h5><i class="fas fa-check-circle text-success"></i> Professional Profile</h5>
+            <p>Create a detailed profile to stand out to employers and increase your chances of being discovered.</p>
+        </div>
+        <div class="col-md-6">
+            <h5><i class="fas fa-check-circle text-success"></i> Interview Preparation</h5>
+            <p>Access exclusive interview tips and resources to prepare for your dream job interviews.</p>
+            
+            <h5><i class="fas fa-check-circle text-success"></i> Job Alerts</h5>
+            <p>Receive personalized job alerts based on your preferences and get notified about new opportunities.</p>
+            
+            <h5><i class="fas fa-check-circle text-success"></i> Save Your Favorites</h5>
+            <p>Bookmark jobs for later and compare opportunities at your own pace.</p>
+        </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="row mb-5 text-center">
+        <div class="col-md-12">
+            <h2 class="fw-bold mb-4">Our Team</h2>
+            <p class="text-muted mb-4">Built by passionate professionals dedicated to revolutionizing the job search experience</p>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="bg-primary text-white py-5 rounded text-center">
+        <h3 class="mb-4">Ready to Find Your Dream Job?</h3>
+        <a href="/jobs" class="btn btn-light btn-lg">
+            <i class="fas fa-briefcase"></i> Start Exploring Jobs
+        </a>
+    </div>
+</div>
+{% endblock %}
