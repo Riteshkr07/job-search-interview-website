@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - JobPortal{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row mb-5">
+        <div class="col-md-8 mx-auto text-center">
+            <h1 class="display-4 fw-bold mb-3">Contact Us</h1>
+            <p class="lead text-muted">We'd love to hear from you. Get in touch with us today!</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-map-marker-alt text-primary" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h5 class="card-title">Address</h5>
+                    <p class="card-text">
+                        123 Tech Street<br>
+                        San Francisco, CA 94105<br>
+                        United States
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-phone text-primary" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h5 class="card-title">Phone</h5>
+                    <p class="card-text">
+                        <a href="tel:+1-800-123-4567" class="text-decoration-none">+1 (800) 123-4567</a><br>
+                        <small class="text-muted">Monday - Friday, 9AM - 6PM EST</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-envelope text-primary" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <h5 class="card-title">Email</h5>
+                    <p class="card-text">
+                        <a href="mailto:support@jobportal.com" class="text-decoration-none">support@jobportal.com</a><br>
+                        <small class="text-muted">We'll respond within 24 hours</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-8 mx-auto">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Send us a Message</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" action="/contact">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control form-control-lg" id="name" name="name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control form-control-lg" id="email" name="email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" class="form-control form-control-lg" id="subject" name="subject" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="row mt-5">
+        <div class="col-md-8 mx-auto">
+            <h3 class="fw-bold mb-4">Frequently Asked Questions</h3>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            How do I create an account?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Click on the "Register" button and fill in your details. It only takes a few minutes to get started!
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            How do I search for jobs?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Use our search bar to enter keywords, location, and job type. You can also use filters to narrow down your results.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Is JobPortal free to use?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes! JobPortal is completely free for job seekers. No hidden fees or charges.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            How do I apply for a job?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            View the job details and click the "Apply Now" button. You can add a cover letter to make your application stand out.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
