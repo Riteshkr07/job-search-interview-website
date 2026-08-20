@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}Interview Tips - JobPortal{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <h1 class="text-center mb-5">
+        <i class="fas fa-lightbulb"></i> Interview Tips & Resources
+    </h1>
+
+    <div class="row">
+        <!-- Before Interview -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fas fa-calendar-alt"></i> Before the Interview</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Research the Company</h6>
+                            <p class="text-muted">Learn about the company's mission, values, recent news, and projects.</p>
+                        </li>
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Know Your Resume</h6>
+                            <p class="text-muted">Be ready to discuss every point on your resume in detail.</p>
+                        </li>
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Practice Common Questions</h6>
+                            <p class="text-muted">Prepare answers for questions like "Tell me about yourself" and "Why do you want this job?"</p>
+                        </li>
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Prepare Questions</h6>
+                            <p class="text-muted">Ask thoughtful questions about the role, team, and company culture.</p>
+                        </li>
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Get Rest</h6>
+                            <p class="text-muted">Sleep well the night before your interview to be alert and focused.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- During Interview -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fas fa-video"></i> During the Interview</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Dress Professionally</h6>
+                            <p class="text-muted">Choose appropriate attire that matches the company culture.</p>
+                        </li>
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Make Eye Contact</h6>
+                            <p class="text-muted">Maintain good eye contact to show confidence and engagement.</p>
+                        </li>
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Listen Carefully</h6>
+                            <p class="text-muted">Pay close attention to questions before answering them.</p>
+                        </li>
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Speak Clearly</h6>
+                            <p class="text-muted">Speak at a moderate pace and avoid using filler words like "um" and "uh".</p>
+                        </li>
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Smile and Be Positive</h6>
+                            <p class="text-muted">Show enthusiasm and maintain a positive attitude throughout.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- After Interview -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="fas fa-check-circle"></i> After the Interview</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled">
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Send a Thank You Email</h6>
+                            <p class="text-muted">Follow up within 24 hours with a personalized thank you message.</p>
+                        </li>
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Reflect on Performance</h6>
+                            <p class="text-muted">Think about what went well and what could be improved.</p>
+                        </li>
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Follow Up</h6>
+                            <p class="text-muted">If you haven't heard back, follow up after the specified timeframe.</p>
+                        </li>
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Stay Positive</h6>
+                            <p class="text-muted">Continue applying to other positions while waiting for a response.</p>
+                        </li>
+                        <li class="mb-3">
+                            <h6><i class="fas fa-check text-success"></i> Learn and Improve</h6>
+                            <p class="text-muted">Use feedback to improve your interview skills for future opportunities.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Common Questions -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0"><i class="fas fa-question-circle"></i> Common Interview Questions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="questionsAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1">
+                                    Tell me about yourself
+                                </button>
+                            </h2>
+                            <div id="q1" class="accordion-collapse collapse" data-bs-parent="#questionsAccordion">
+                                <div class="accordion-body">
+                                    Provide a brief summary of your background, experience, and career goals. Focus on relevant achievements.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2">
+                                    Why do you want this job?
+                                </button>
+                            </h2>
+                            <div id="q2" class="accordion-collapse collapse" data-bs-parent="#questionsAccordion">
+                                <div class="accordion-body">
+                                    Show genuine interest in the role and company. Mention specific reasons why you're excited about the opportunity.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3">
+                                    What are your strengths?
+                                </button>
+                            </h2>
+                            <div id="q3" class="accordion-collapse collapse" data-bs-parent="#questionsAccordion">
+                                <div class="accordion-body">
+                                    Highlight 2-3 relevant strengths backed by examples. Relate them to the job requirements.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q4">
+                                    What is your biggest weakness?
+                                </button>
+                            </h2>
+                            <div id="q4" class="accordion-collapse collapse" data-bs-parent="#questionsAccordion">
+                                <div class="accordion-body">
+                                    Choose a genuine weakness and discuss how you're working to improve it. Show self-awareness.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
