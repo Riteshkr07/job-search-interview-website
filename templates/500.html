@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}500 - Server Error - JobPortal{% endblock %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <div class="display-1 fw-bold text-danger mb-3">500</div>
+            <h1 class="display-4 fw-bold mb-3">Server Error</h1>
+            <p class="lead text-muted mb-4">Oops! Something went wrong on our end. We're working to fix it.</p>
+            
+            <div class="mb-4">
+                <i class="fas fa-exclamation-triangle" style="font-size: 4rem; color: #ffc107;"></i>
+            </div>
+
+            <p class="text-muted mb-4">Please try again later or contact our support team if the problem persists.</p>
+
+            <a href="/" class="btn btn-primary btn-lg me-2">
+                <i class="fas fa-home"></i> Go Home
+            </a>
+            <a href="/contact" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-envelope"></i> Contact Support
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
